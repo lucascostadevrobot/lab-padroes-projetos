@@ -19,8 +19,7 @@ public class ClienteServiceImpl implements ClienteService {
     private ClienteRepository clienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
-    @Autowired
-    private ClienteService clienteService;
+
 
     @Autowired
     private ConsultaViaCepService consultaViaCepService;
@@ -40,7 +39,7 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente buscarPorId(Long id) {
         Optional<Cliente> idCliente = clienteRepository.findById(id);
         if (idCliente.isPresent()) {
-            return clienteService.buscarPorId(id);
+         clienteRepository.findById(id);
         }
         return null;
     }
@@ -63,7 +62,7 @@ public class ClienteServiceImpl implements ClienteService {
      * Verifica se endereço existe, senao salva um novo endereco consultando ViaCep
      * Verifica se o IdCliente esta presente, se sim pega o cliente em questão.
      */
-    private void salvarObjetoCliente(Long id, Cliente cliente) {
+    public void salvarObjetoCliente(Long id, Cliente cliente) {
         Optional<Cliente> idClienteEscolhido = clienteRepository.findById(id);
         Long cep = cliente.getEndereco().getCep();
         if (idClienteEscolhido.isPresent()) {

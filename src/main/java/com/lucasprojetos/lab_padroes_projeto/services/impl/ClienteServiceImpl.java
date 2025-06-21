@@ -32,21 +32,24 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void inserir(Cliente cliente) {
-        salvarObjetoCliente(null, cliente);
+        salvarObjetoCliente(cliente);
     }
 
     @Override
     public Cliente buscarPorId(Long id) {
         Optional<Cliente> idCliente = clienteRepository.findById(id);
         if (idCliente.isPresent()) {
-         clienteRepository.findById(id);
+            clienteRepository.findById(id);
         }
         return null;
     }
 
     @Override
     public void atualizar(Long id, Cliente cliente) {
-        salvarObjetoCliente(id, cliente);
+        Optional<Cliente> idEncontrado = clienteRepository.findById(id);
+        if (idEncontrado.isPresent()) {
+            salvarObjetoCliente(cliente);
+        }
     }
 
     @Override
@@ -62,18 +65,15 @@ public class ClienteServiceImpl implements ClienteService {
      * Verifica se endereço existe, senao salva um novo endereco consultando ViaCep
      * Verifica se o IdCliente esta presente, se sim pega o cliente em questão.
      */
-    public void salvarObjetoCliente(Long id, Cliente cliente) {
-        Optional<Cliente> idClienteEscolhido = clienteRepository.findById(id);
+    public void salvarObjetoCliente(Cliente cliente) {
         Long cep = cliente.getEndereco().getCep();
-        if (idClienteEscolhido.isPresent()) {
-            Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
-                //caso nao existe, integrar com o ViaCep e persistir o retorno
-                Endereco novoEndereco = consultaViaCepService.consultarCep(String.valueOf(cep));
-                enderecoRepository.save(novoEndereco);
-                return novoEndereco;
-            });
-            cliente.setEndereco(endereco);
-            clienteRepository.save(cliente);
-        }
+        Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
+            //caso nao existe, integrar com o ViaCep e persistir o retorno
+            Endereco novoEndereco = consultaViaCepService.consultarCep(String.valueOf(cep));
+            enderecoRepository.save(novoEndereco);
+            return novoEndereco;
+        });
+        cliente.setEndereco(endereco);
+        clienteRepository.save(cliente);
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ClienteService {
 
-    void inserir(Cliente clinte);
+    void inserir(Cliente cliente);
 
     Cliente buscarPorId(Long id);
 

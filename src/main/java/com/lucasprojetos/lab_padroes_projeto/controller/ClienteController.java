@@ -17,7 +17,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @PostMapping("/salvarClientes")
-    public ResponseEntity<Cliente> save(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> saveAll(@RequestBody Cliente cliente) {
         clienteService.inserir(cliente);
         return ResponseEntity.ok(cliente);
     }

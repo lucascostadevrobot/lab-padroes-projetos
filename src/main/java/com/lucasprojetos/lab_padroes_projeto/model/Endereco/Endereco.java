@@ -1,6 +1,8 @@
 package com.lucasprojetos.lab_padroes_projeto.model.Endereco;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Objects;
@@ -8,7 +10,7 @@ import java.util.Objects;
 @Entity
 public class Endereco {
     @Id
-    private Long cep;
+    private String cep;
     private String rua;
     private String complemento;
     private String localidade;
@@ -18,7 +20,7 @@ public class Endereco {
     private String ddd;
     private String siafi;
 
-    public Endereco(Long cep, String rua, String complemento, String localidade, String uf, String ibge, String gia, String ddd, String siafi) {
+    public Endereco(String cep, String rua, String complemento, String localidade, String uf, String ibge, String gia, String ddd, String siafi) {
         this.cep = cep;
         this.rua = rua;
         this.complemento = complemento;
@@ -33,11 +35,11 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Long getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(Long cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 

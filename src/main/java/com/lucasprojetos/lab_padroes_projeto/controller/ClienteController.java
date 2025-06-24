@@ -18,8 +18,8 @@ public class ClienteController {
 
     @PostMapping("/salvarClientes")
     public ResponseEntity<Cliente> saveAll(@RequestBody Cliente cliente) {
-        clienteService.inserir(cliente);
-        return ResponseEntity.ok(cliente);
+        //return ResponseEntity.status(HttpStatus.OK).body(clienteService.inserir(cliente));
+        return  ResponseEntity.status(HttpStatus.OK).body(clienteService.inserir(cliente));
     }
 
     @GetMapping("/listarClientes")
@@ -28,14 +28,14 @@ public class ClienteController {
     }
 
     @GetMapping("/listarClientes/{id}")
-    public ResponseEntity<Cliente> findById(Long id) {
+    public ResponseEntity<Cliente> findById(@PathVariable  Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.buscarPorId(id));
     }
 
     @PutMapping("/atualizarClientes/{id}")
-    public ResponseEntity<Cliente> putById(@PathVariable Long id, Cliente cliente){
-        clienteService.atualizar(id, cliente);
-        return ResponseEntity.ok(cliente);
+    public ResponseEntity<Cliente> putById(@PathVariable Long id, @RequestBody  Cliente cliente){
+        cliente.setId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.atualizar(id, cliente));
     }
 
     @DeleteMapping("/deletarClientes/{id}")

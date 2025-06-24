@@ -6,7 +6,6 @@ import com.lucasprojetos.lab_padroes_projeto.repository.ClienteRepository;
 import com.lucasprojetos.lab_padroes_projeto.repository.EnderecoRepository;
 import com.lucasprojetos.lab_padroes_projeto.services.ClienteService;
 import com.lucasprojetos.lab_padroes_projeto.services.ConsultaViaCepService;
-import feign.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +18,6 @@ public class ClienteServiceImpl implements ClienteService {
     private ClienteRepository clienteRepository;
     @Autowired
     private EnderecoRepository enderecoRepository;
-
-
     @Autowired
     private ConsultaViaCepService consultaViaCepService;
 
@@ -31,25 +28,26 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void inserir(Cliente cliente) {
-        salvarObjetoCliente(cliente);
+    public Cliente inserir(Cliente cliente) {
+        return salvarObjetoCliente(cliente);
     }
 
     @Override
     public Cliente buscarPorId(Long id) {
         Optional<Cliente> idCliente = clienteRepository.findById(id);
         if (idCliente.isPresent()) {
-            clienteRepository.findById(id);
+            return clienteRepository.findById(id).orElse(null);
         }
         return null;
     }
 
     @Override
-    public void atualizar(Long id, Cliente cliente) {
+    public Cliente atualizar(Long id, Cliente cliente) {
         Optional<Cliente> idEncontrado = clienteRepository.findById(id);
         if (idEncontrado.isPresent()) {
-            salvarObjetoCliente(cliente);
+            return salvarObjetoCliente(cliente);
         }
+        return null;
     }
 
     @Override
@@ -64,16 +62,22 @@ public class ClienteServiceImpl implements ClienteService {
      * Metodo compacto para persistir o cliente de forma completada incluindo:
      * Verifica se endereço existe, senao salva um novo endereco consultando ViaCep
      * Verifica se o IdCliente esta presente, se sim pega o cliente em questão.
+     *
+     * @return
      */
-    public void salvarObjetoCliente(Cliente cliente) {
-        Long cep = cliente.getEndereco().getCep();
-        Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
+    public Cliente salvarObjetoCliente(Cliente cliente) {
+        if (cliente.getEndereco() == null || cliente.getEndereco().getCep() == null) {
+            throw new IllegalArgumentException("Endereço ou CEP não informado");
+        }
+
+        String cep =  cliente.getEndereco().getCep();
+        Endereco endereco = enderecoRepository.findById(Long.valueOf(cep)).orElseGet(() -> {
             //caso nao existe, integrar com o ViaCep e persistir o retorno
-            Endereco novoEndereco = consultaViaCepService.consultarCep(String.valueOf(cep));
+            Endereco novoEndereco = consultaViaCepService.consultarCep((cep));
             enderecoRepository.save(novoEndereco);
             return novoEndereco;
         });
         cliente.setEndereco(endereco);
-        clienteRepository.save(cliente);
+        return clienteRepository.save(cliente);
     }
 }

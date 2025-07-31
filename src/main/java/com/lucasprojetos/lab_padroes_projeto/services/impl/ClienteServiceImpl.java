@@ -70,14 +70,18 @@ public class ClienteServiceImpl implements ClienteService {
             throw new IllegalArgumentException("Endereço ou CEP não informado");
         }
 
-        String cep =  cliente.getEndereco().getCep();
-        Endereco endereco = enderecoRepository.findById(Long.valueOf(cep)).orElseGet(() -> {
-            //caso nao existe, integrar com o ViaCep e persistir o retorno
-            Endereco novoEndereco = consultaViaCepService.consultarCep((cep));
-            enderecoRepository.save(novoEndereco);
-            return novoEndereco;
-        });
-        cliente.setEndereco(endereco);
-        return clienteRepository.save(cliente);
+        try {
+            String cep = cliente.getEndereco().getCep();
+            Endereco endereco = enderecoRepository.findById(Long.valueOf(cep)).orElseGet(() -> {
+                //caso nao existe, integrar com o ViaCep e persistir o retorno
+                Endereco novoEndereco = consultaViaCepService.consultarCep((cep));
+                enderecoRepository.save(novoEndereco);
+                return novoEndereco;
+            });
+            cliente.setEndereco(endereco);
+            return clienteRepository.save(cliente);
+        } catch (Exception e) {
+            throw new RuntimeException("O erro está acontecendo ao tentar utilizar o método salvar: Conflito entre transações!" + e);
+        }
     }
 }

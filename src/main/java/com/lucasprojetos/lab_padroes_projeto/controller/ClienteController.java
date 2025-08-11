@@ -1,11 +1,10 @@
 package com.lucasprojetos.lab_padroes_projeto.controller;
 
-import com.lucasprojetos.lab_padroes_projeto.model.cliente.Cliente;
+import com.lucasprojetos.lab_padroes_projeto.model.clientes.Cliente;
 import com.lucasprojetos.lab_padroes_projeto.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,33 +18,28 @@ public class ClienteController {
 
 
     @PostMapping("/salvarClientes")
-    @PreAuthorize("hasAnyRole('ATENDIMENTO','MANAGERS', 'GESTORES')")
     public ResponseEntity<Cliente> saveAll(@RequestBody Cliente cliente) {
         //return ResponseEntity.status(HttpStatus.OK).body(clienteService.inserir(cliente));
         return  ResponseEntity.status(HttpStatus.OK).body(clienteService.inserir(cliente));
     }
 
     @GetMapping("/listarClientes")
-    @PreAuthorize("hasAnyRole('ATENDIMENTO', 'GESTORES', 'MANAGERS')")
     public ResponseEntity<Iterable<Cliente>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.buscarTodos());
     }
 
     @GetMapping("/listarClientes/{id}")
-    @PreAuthorize("hasAnyRole('ATENDIMENTO', 'GESTORES', 'MANAGERS')")
     public ResponseEntity<Cliente> findById(@PathVariable  Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.buscarPorId(id));
     }
 
     @PutMapping("/atualizarClientes/{id}")
-    @PreAuthorize("hasAnyRole('GESTORES', 'MANAGERS')")
     public ResponseEntity<Cliente> putById(@PathVariable Long id, @RequestBody  Cliente cliente){
         cliente.setId(id);
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.atualizar(id, cliente));
     }
 
     @DeleteMapping("/deletarClientes/{id}")
-    @PreAuthorize("hasAnyRole('MANAGERS')")
     public ResponseEntity<Cliente> deleteById(@PathVariable  Long id, Cliente cliente){
         clienteService.deletar(id);
         return ResponseEntity.ok(cliente);

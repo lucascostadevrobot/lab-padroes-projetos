@@ -1,7 +1,7 @@
 package com.lucasprojetos.lab_padroes_projeto.services.impl;
 
-import com.lucasprojetos.lab_padroes_projeto.model.Endereco.Endereco;
-import com.lucasprojetos.lab_padroes_projeto.model.cliente.Cliente;
+import com.lucasprojetos.lab_padroes_projeto.model.endereco.Endereco;
+import com.lucasprojetos.lab_padroes_projeto.model.clientes.Cliente;
 import com.lucasprojetos.lab_padroes_projeto.repository.ClienteRepository;
 import com.lucasprojetos.lab_padroes_projeto.repository.EnderecoRepository;
 import com.lucasprojetos.lab_padroes_projeto.services.ClienteService;

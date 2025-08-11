@@ -1,6 +1,6 @@
 package com.lucasprojetos.lab_padroes_projeto.services;
 
-import com.lucasprojetos.lab_padroes_projeto.model.cliente.Cliente;
+import com.lucasprojetos.lab_padroes_projeto.model.clientes.Cliente;
 import org.springframework.stereotype.Service;
 
 

@@ -20,16 +20,17 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+    public SecurityFilterChain filterChain(HttpSecurity httpRequests) throws Exception {
+        httpRequests
                 .csrf(csrf -> csrf.disable()) // desativa CSRF para APIs REST
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/publico/**").permitAll() // endpoints públicos)
+                        .requestMatchers("/salvarClientes").hasAnyRole("ATENDIMENTO", "MANAGERS", "GESTORES")
                         .anyRequest().authenticated() // o restante exige login
                 )
                 .httpBasic(Customizer.withDefaults());  // usa autenticação básica
 
-        return http.build();
+        return httpRequests.build();
     }
 
     @Bean

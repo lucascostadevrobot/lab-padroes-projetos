@@ -1,8 +1,6 @@
-package com.lucasprojetos.lab_padroes_projeto.model.Endereco;
+package com.lucasprojetos.lab_padroes_projeto.model.endereco;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.util.Objects;

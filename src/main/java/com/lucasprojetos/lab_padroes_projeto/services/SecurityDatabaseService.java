@@ -5,24 +5,22 @@ import com.lucasprojetos.lab_padroes_projeto.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class SecurityDatabaseService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Procura o usuário no banco
-        Usuario usuario = usuarioRepository.findByUsuarioname(username);
+        Usuario usuario = usuarioRepository.findByUserName(username);
 
         // Se o usuário não for encontrado, lança exceção
         if (usuario == null) {

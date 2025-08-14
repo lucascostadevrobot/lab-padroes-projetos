@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
     @Query("SELECT e FROM Usuario e JOIN FETCH e.roles  WHERE e.userName= (:userName)")
-    public Usuario findByUsuarioname(@Param("userName") String userName);
+    public Usuario findByUserName(@Param("userName") String userName);
 }

@@ -33,7 +33,7 @@ public class SecurityConfig {
         return httpRequests.build();
     }
 
-    @Bean
+   /* @Bean
     public UserDetailsService userDetailsService() {
         UserDetails userAtendimento = User.withUsername("atendimento")
                 .password(passwordEncoder().encode("user123"))
@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .build();
 
         return new InMemoryUserDetailsManager(userAtendimento, userGestor, UserAdmin);
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {

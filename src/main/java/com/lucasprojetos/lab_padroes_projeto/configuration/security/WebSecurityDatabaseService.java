@@ -1,6 +1,6 @@
-package com.lucasprojetos.lab_padroes_projeto.services;
+package com.lucasprojetos.lab_padroes_projeto.configuration.security;
 
-import com.lucasprojetos.lab_padroes_projeto.configuration.security.SecurityDatabaseService;
+import com.lucasprojetos.lab_padroes_projeto.services.SecurityDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;

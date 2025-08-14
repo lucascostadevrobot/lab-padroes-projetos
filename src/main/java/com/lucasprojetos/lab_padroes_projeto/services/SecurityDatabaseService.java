@@ -1,4 +1,4 @@
-package com.lucasprojetos.lab_padroes_projeto.configuration.security;
+package com.lucasprojetos.lab_padroes_projeto.services;
 
 import com.lucasprojetos.lab_padroes_projeto.model.usuarios.Usuario;
 import com.lucasprojetos.lab_padroes_projeto.repository.UsuarioRepository;

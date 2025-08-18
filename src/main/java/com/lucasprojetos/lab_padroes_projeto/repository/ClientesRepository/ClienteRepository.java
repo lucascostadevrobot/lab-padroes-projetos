@@ -1,4 +1,4 @@
-package com.lucasprojetos.lab_padroes_projeto.repository;
+package com.lucasprojetos.lab_padroes_projeto.repository.ClientesRepository;
 
 import com.lucasprojetos.lab_padroes_projeto.model.clientes.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;

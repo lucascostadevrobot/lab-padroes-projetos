@@ -1,6 +1,6 @@
 package com.lucasprojetos.lab_padroes_projeto.services;
 
-import com.lucasprojetos.lab_padroes_projeto.model.endereco.Endereco;
+import com.lucasprojetos.lab_padroes_projeto.model.enderecos.Endereco;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

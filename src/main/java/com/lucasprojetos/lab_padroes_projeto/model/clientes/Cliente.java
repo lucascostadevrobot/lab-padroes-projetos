@@ -1,6 +1,6 @@
 package com.lucasprojetos.lab_padroes_projeto.model.clientes;
 
-import com.lucasprojetos.lab_padroes_projeto.model.endereco.Endereco;
+import com.lucasprojetos.lab_padroes_projeto.model.enderecos.Endereco;
 import jakarta.persistence.*;
 
 @Entity

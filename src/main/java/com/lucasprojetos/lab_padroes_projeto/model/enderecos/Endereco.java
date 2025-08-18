@@ -1,4 +1,4 @@
-package com.lucasprojetos.lab_padroes_projeto.model.endereco;
+package com.lucasprojetos.lab_padroes_projeto.model.enderecos;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,4 +1,4 @@
-package com.lucasprojetos.lab_padroes_projeto.controller;
+package com.lucasprojetos.lab_padroes_projeto.controller.clientes;
 
 import com.lucasprojetos.lab_padroes_projeto.model.clientes.Cliente;
 import com.lucasprojetos.lab_padroes_projeto.services.ClienteService;

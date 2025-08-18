@@ -1,9 +1,9 @@
 package com.lucasprojetos.lab_padroes_projeto.services.impl;
 
-import com.lucasprojetos.lab_padroes_projeto.model.endereco.Endereco;
+import com.lucasprojetos.lab_padroes_projeto.model.enderecos.Endereco;
 import com.lucasprojetos.lab_padroes_projeto.model.clientes.Cliente;
-import com.lucasprojetos.lab_padroes_projeto.repository.ClienteRepository;
-import com.lucasprojetos.lab_padroes_projeto.repository.EnderecoRepository;
+import com.lucasprojetos.lab_padroes_projeto.repository.ClientesRepository.ClienteRepository;
+import com.lucasprojetos.lab_padroes_projeto.repository.EnderecosRepository.EnderecoRepository;
 import com.lucasprojetos.lab_padroes_projeto.services.ClienteService;
 import com.lucasprojetos.lab_padroes_projeto.services.ConsultaViaCepService;
 import org.springframework.beans.factory.annotation.Autowired;
